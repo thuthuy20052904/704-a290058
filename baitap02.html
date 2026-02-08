@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Bài 2 - Todo List</title>
+  <style>
+    body { font-family: Arial; text-align: center; }
+    ul { list-style: none; padding: 0; }
+    li { margin: 5px 0; }
+  </style>
+</head>
+<body>
+
+<h2>To-do List</h2>
+
+<input id="task" placeholder="Nhập công việc">
+<button onclick="add()">Add</button>
+
+<ul id="list"></ul>
+
+<script>
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  function render() {
+    const list = document.getElementById("list");
+    list.innerHTML = "";
+    tasks.forEach((t, i) => {
+      list.innerHTML += `<li>${t} <button onclick="del(${i})">X</button></li>`;
+    });
+  }
+
+  function add() {
+    const t = task.value;
+    if (!t) return;
+    tasks.push(t);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    task.value = "";
+    render();
+  }
+
+  function del(i) {
+    tasks.splice(i, 1);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    render();
+  }
+
+  render();
+</script>
+
+</body>
+</html>
